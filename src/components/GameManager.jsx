@@ -17,31 +17,34 @@ export default function GameManager() {
       const fetchCats = async () => {
         try {
           const response = await fetch('https://cataas.com/api/cats?limit=12&skip=0');
-          console.log(response);
           const data = await response.json();
           // Now map to the cat state
-          const catData = data.map((entry) => {
-            (
-                {
+        const catData = data.map((entry) => {
+                return {
                     url: urlPrefix + entry.id,
                     score: 0
                 }
-            )
           });
-          setGameState(
-            (
-                {
-                    cats: catData,
-                    score: 0,
-                    highScore: 0
-                }
-            )
+        setGameState(
+            {
+                cats: catData,
+                score: 0,
+                highScore: 0
+            }
         )          
         } catch (err) {
           console.error('Issue getting cat:', err);
         }
       }
       fetchCats();
+
+    // For debugging
+    setGameState({
+        cats: [{score: 0, url: 'test'}, {score: 0, url: 'test1'}],
+        score: 0,
+        highScore: 0
+    });
+
     }, []);
 
     // Define callback function
