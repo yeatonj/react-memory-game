@@ -1,5 +1,6 @@
 import ImageCard from "./ImageCard";
 import ScoreDisplay from "./ScoreDisplay";
+import '../styles/DisplayManager.css'
 
 
 export default function DisplayManager({
