@@ -32,24 +32,34 @@ export default function DisplayManager(
     }
     
     // Now, draw based on that ordering
-
-    return (
-        <>
-            <ScoreDisplay 
-                currentScore={score}
-                highScore={highScore}
-            />
-            <div className="image-cards">
-                {imgOrder.map(ind =>
-                    <ImageCard 
-                        key={ind}
-                        url={imageDetails[ind].url}
-                        id={ind}
-                        callback={() => clickCallback(ind)}
-                    />
-                )}
-            </div>
-        </>
-    )
-
+    if (imageDetails === null) {
+        return (
+            <>
+                <ScoreDisplay 
+                        currentScore={0}
+                        highScore={0}
+                />
+                <p>Currently fetching images, please wait!</p>
+            </>
+        )
+    } else {
+        return (
+            <>
+                <ScoreDisplay 
+                    currentScore={score}
+                    highScore={highScore}
+                />
+                <div className="image-cards">
+                    {imgOrder.map(ind =>
+                        <ImageCard 
+                            key={ind}
+                            url={imageDetails[ind].url}
+                            id={ind}
+                            callback={() => clickCallback(ind)}
+                        />
+                    )}
+                </div>
+            </>
+        )
+    }
 }
